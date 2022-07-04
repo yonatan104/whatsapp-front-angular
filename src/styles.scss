@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+// SETUP
+@import 'setup/variables';
+//basics
+@import './styles/basics/base';
+
+
+//cmps
+@import './styles/cmps/contact-filter';
+@import './styles/cmps/contact-app-header';
+@import './styles/cmps/contact-list';
+@import './styles/cmps/contact-preview';
+
+
+//pages
+@import './styles/pages/contact-app'
+
