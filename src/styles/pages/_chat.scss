@@ -1,0 +1,19 @@
+.chat {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    overflow-y: hidden;
+
+    .back-ground-img {
+        position: absolute;
+        z-index: 5;
+        inset: 0;
+        opacity: 0.1;
+        height: 100vh;
+        background-image: url(https://web.whatsapp.com/img/bg-chat-tile-dark_a4be512e7195b6b733d9110b408f075d.png);
+        background-size: 412.5px 749.25px;
+    }
+
+
+
+}

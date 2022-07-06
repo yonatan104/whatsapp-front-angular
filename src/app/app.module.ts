@@ -13,6 +13,7 @@ import { ChatComponent } from './pages/chat/chat.component';
 import { ChatFooterComponent } from './cmps/chat/chat-footer/chat-footer.component';
 import { MessageListComponent } from './cmps/chat/message-list/message-list.component';
 import { MessagePreviewComponent } from './cmps/chat/message-preview/message-preview.component';
+import { SignComponent } from './pages/sign/sign.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MessagePreviewComponent } from './cmps/chat/message-preview/message-pre
     ChatComponent,
     ChatFooterComponent,
     MessageListComponent,
-    MessagePreviewComponent
+    MessagePreviewComponent,
+    SignComponent
   ],
   imports: [
     BrowserModule,

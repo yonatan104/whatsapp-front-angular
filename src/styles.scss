@@ -4,13 +4,20 @@
 @import './styles/basics/base';
 
 
-//cmps
-@import './styles/cmps/contact-filter';
-@import './styles/cmps/contact-app-header';
-@import './styles/cmps/contact-list';
-@import './styles/cmps/contact-preview';
+//CMPS:
+//contact
+@import './styles/cmps/contact/contact-filter';
+@import './styles/cmps/contact/contact-app-header';
+@import './styles/cmps/contact/contact-list';
+@import './styles/cmps/contact/contact-preview';
+//chat
+@import './styles/cmps/chat/chat-header';
+
+@import './styles/cmps/chat/chat-footer';
+
 
 
 //pages
-@import './styles/pages/contact-app'
+@import './styles/pages/contact-app';
+@import './styles/pages/chat';
 

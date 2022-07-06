@@ -1,0 +1,89 @@
+.chat-header {
+    box-shadow: 0 1px 3pxrgba(11, 20, 26, .4);
+    padding: 10px 16px;
+    background-color: $panel-header-background;
+
+    position: relative;
+    z-index: 1000;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 59px;
+
+    .avatar-main-container {
+        padding: 0 15px 0 0;
+        margin-top: -1px;
+
+        .avatar-container {
+            height: 40px;
+            width: 40px;
+            cursor: pointer;
+            border-radius: 50%;
+            position: relative;
+
+            .svg-container {
+                left: 0;
+                position: absolute;
+                top: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+
+                svg {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    pointer-events: none;
+                }
+            }
+
+            img {
+                opacity: 1;
+                visibility: visible;
+                border-radius: 50%;
+
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                transition: opacity .15s ease-out;
+            }
+        }
+    }
+
+
+    .chat-name {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: center;
+        min-width: 0;
+
+        .title-container {
+            text-align: right;
+            margin-top: -1px;
+            display: flex;
+            align-items: flex-start;
+            line-height: normal;
+
+            .title-content {
+                text-align: left;
+                font-weight: 500;
+                display: flex;
+                flex-grow: 1;
+                overflow: hidden;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 21px;
+                color: $primary-strong;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+
+}
