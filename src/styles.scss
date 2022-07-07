@@ -1,5 +1,8 @@
 // SETUP
 @import 'setup/variables';
+@import 'setup/mixins';
+@import 'setup/functions';
+
 //basics
 @import './styles/basics/base';
 
@@ -10,9 +13,9 @@
 @import './styles/cmps/contact/contact-app-header';
 @import './styles/cmps/contact/contact-list';
 @import './styles/cmps/contact/contact-preview';
+
 //chat
 @import './styles/cmps/chat/chat-header';
-
 @import './styles/cmps/chat/chat-footer';
 
 
@@ -20,4 +23,5 @@
 //pages
 @import './styles/pages/contact-app';
 @import './styles/pages/chat';
+@import './styles/pages/sign';
 

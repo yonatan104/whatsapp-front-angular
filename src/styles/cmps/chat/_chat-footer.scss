@@ -9,7 +9,7 @@
     order: 3;
     width: 100%;
     min-height: 62px;
-    padding-right: 17px;
+    padding-right: 10px;
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -25,25 +25,7 @@
         grid-template-columns: 1fr auto;
         align-items: center;
 
-        .input-container {
-            padding: 9px 12px 11px;
-            margin: 5px 10px;
-            background-color: $compose-input-border;
-            border: 1px solid $compose-input-border;
-            border-radius: 8px;
-
-            input {
-                border: 0;
-                background-color: $compose-input-border;
-                color: $primary-strong;
-            }
-
-            ::placeholder {
-                opacity: 1;
-                color: #d9dfe2cb;
-            }
-
-        }
+       
 
 
         .record {

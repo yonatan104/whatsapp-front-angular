@@ -40,3 +40,23 @@ input:focus {
 *:focus {
     outline: none;
 }
+
+.input-container {
+    padding: 9px 12px 11px;
+    margin: 5px 10px;
+    background-color: $compose-input-border;
+    border: 1px solid $compose-input-border;
+    border-radius: 8px;
+
+    input {
+        border: 0;
+        background-color: $compose-input-border;
+        color: $primary-strong;
+    }
+
+    ::placeholder {
+        opacity: 1;
+        color: #d9dfe2cb;
+    }
+
+}

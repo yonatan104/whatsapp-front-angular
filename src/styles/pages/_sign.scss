@@ -1,0 +1,43 @@
+.sign {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .signup-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .bttn-container {
+            margin: 5px 10px;
+
+            button {
+                @include btn($type: regular);
+            }
+        }
+
+        .img-container-main {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            .img-container {
+                width: 200px;
+                height: 200px;
+
+                img {
+                    opacity: 1;
+                    visibility: visible;
+                    border-radius: 50%;
+
+                    position: relative;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    transition: opacity .15s ease-out;
+                }
+            }
+        }
+    }
+}

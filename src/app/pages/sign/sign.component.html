@@ -1,1 +1,29 @@
-<p>sign works!</p>
+<div class="sign">
+    <div class="signup-container">
+        <div *ngIf="imgUrl" class="img-container-main">
+            <div class="img-container">
+
+                <img src="{{imgUrl}}" alt="">
+            </div>
+        </div>
+        <form (ngSubmit)="onSaveContact()">
+
+            <div class="input-container">
+                <input [(ngModel)]="contact.name" type="text" name="name" id="name" placeholder="Enter your name">
+            </div>
+            <div class="input-container">
+                <input [(ngModel)]="contact.password" type="text" name="password" id="password"
+                placeholder="Enter a password">
+            </div>
+            
+            <div class="input-file-container">
+                <input type="file" (change)="onFileSelected($event)">
+                <label>Choose file</label>
+            </div>
+            
+            <div class="bttn-container">
+                <button>Signup</button>
+            </div>
+        </form>
+    </div>
+</div>

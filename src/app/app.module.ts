@@ -14,7 +14,8 @@ import { ChatFooterComponent } from './cmps/chat/chat-footer/chat-footer.compone
 import { MessageListComponent } from './cmps/chat/message-list/message-list.component';
 import { MessagePreviewComponent } from './cmps/chat/message-preview/message-preview.component';
 import { SignComponent } from './pages/sign/sign.component';
-
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,9 @@ import { SignComponent } from './pages/sign/sign.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

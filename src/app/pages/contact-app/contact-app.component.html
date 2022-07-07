@@ -1,5 +1,7 @@
 <div class="contact-app">
    <contact-app-header></contact-app-header>
+   <!-- {{contacts$ | async| json}}} -->
    <contact-filter></contact-filter>
    <contact-list [contacts]="(contacts$ | async)!"></contact-list>
+   
 </div>
