@@ -15,6 +15,8 @@ export class ContactAppComponent implements OnInit {
   contacts$!:Observable<Contact[]>
 
   ngOnInit(): void {
+    console.log('hello ');
+    
     this.contactService.query()
     this.contacts$ = this.contactService.contacts$
   }

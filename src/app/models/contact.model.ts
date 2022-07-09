@@ -5,7 +5,7 @@ export class Contact {
         public name: string = '',
         public password?: string,
         public lastMsgTimeStemp: string = '',
-        public imgUrl?: string 
+        public imgUrl: string = '' 
     ) {
 
     }

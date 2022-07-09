@@ -16,6 +16,12 @@
                 @include btn($type: regular);
             }
         }
+        .input-file-container{
+            margin: 5px 10px;
+            input{
+                display: none;
+            }
+        }
 
         .img-container-main {
             width: 100%;

@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 export class SignComponent implements OnInit {
 
   constructor(private cloudinaryService: CloudinaryService, private contactservice: ContactService, private router: Router,) { }
-  contact = { name: '', password: '' } as Contact
+  contact = { name: '', password: '' , imgUrl:'', lastMsgTimeStemp: ''} as Contact
   imgUrl = null as any
   subImg !: Subscription
   ngOnInit(): void {
@@ -30,10 +30,9 @@ export class SignComponent implements OnInit {
     })
   }
 
-  async onSaveContact() {
+  async onSignUp() {
     try {
-      console.log("🚀 ~ file: sign.component.ts ~ line 36 ~ SignComponent ~ onSaveContact ~ this.contact", this.contact)
-      await this.contactservice.saveContact(this.contact)
+      await this.contactservice.signUp(this.contact)
       this.router.navigateByUrl('/contact')
 
     } catch (error) {
