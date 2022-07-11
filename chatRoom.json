@@ -1,0 +1,19 @@
+{
+  "_id": "123123",
+  "usersIds": ["321351651", "1516516565151"],
+  "isGroup": "false",
+  "groupImgUrl": "",
+
+  "messages": [
+    {
+      "fromUserID": "pukipuk",
+      "text": "how are you ?",
+      "createAt": "12312315156446"
+    },
+    {
+      "fromUserID": "pukipuk",
+      "text": "this is a butiful day",
+      "createAt": "12312315152236446"
+    }
+  ]
+}

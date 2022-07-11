@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, of, throwError, catchError, lastValueFrom } from 'rxjs';
+import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { Contact } from '../models/contact.model';
 import { environment } from '../../environments/environment';
-import { HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -23,9 +22,8 @@ export class ContactService {
 
   constructor(private http: HttpClient) { }
 
-
   public query() {
-    this.http.get(this.BASE_URL + '/contact').subscribe(value => this._contacts$.next(value as Contact[]))
+    this.http.get(this.BASE_URL + '/user').subscribe(value => this._contacts$.next(value as Contact[]))
   }
   public async signUp(userCred: Contact) {
     const user = await lastValueFrom(this.http.post(this.BASE_URL + '/auth/signup', userCred))
