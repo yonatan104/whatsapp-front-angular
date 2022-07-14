@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, lastValueFrom } from 'rxjs';
+import { BehaviorSubject, filter, lastValueFrom, map, toArray } from 'rxjs';
 import { Contact } from '../models/contact.model';
 import { environment } from '../../environments/environment';
 
@@ -9,8 +9,6 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ContactService {
-
-
   private _contacts$ = new BehaviorSubject<Contact[]>([])
   public contacts$ = this._contacts$.asObservable()
   private _STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
@@ -23,7 +21,10 @@ export class ContactService {
   constructor(private http: HttpClient) { }
 
   public query() {
-    this.http.get(this.BASE_URL + '/user').subscribe(value => this._contacts$.next(value as Contact[]))
+    this.http.get(this.BASE_URL + '/user', { params: { logedInUserId: this.getLoggedinUser()._id } })
+      .subscribe(value => {
+        this._contacts$.next(value as Contact[])
+      })
   }
   public async signUp(userCred: Contact) {
     const user = await lastValueFrom(this.http.post(this.BASE_URL + '/auth/signup', userCred))
@@ -33,7 +34,6 @@ export class ContactService {
   public async logout() {
     sessionStorage.removeItem(this._STORAGE_KEY_LOGGEDIN_USER)
     return await lastValueFrom(this.http.post(this.BASE_URL + '/auth/logout', {}))
-    //TODO: check this function 
   }
 
   public saveLocalUser(user: Contact) {

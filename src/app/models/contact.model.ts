@@ -5,14 +5,10 @@ export class Contact {
         public name: string = '',
         public password?: string,
         public lastMsgTimeStemp: string = '',
-        public imgUrl: string = '' 
+        public imgUrl: string = '' ,
+        public chatRoomsIds?: string[]
     ) {
 
-    }
-
-    setId?() {
-        // Implement your own set Id
-        this._id = 'hkjgbjhb '
     }
 }
 
