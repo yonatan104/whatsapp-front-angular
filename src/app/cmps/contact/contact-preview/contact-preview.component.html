@@ -1,7 +1,7 @@
 <div class="contact-preview-container">
-    <a [routerLink]="['/contact', contact._id]">
+    <!-- <a [routerLink]="['/contact', contact._id]"> -->
 
-        <div class="contact-preview">
+        <div class="contact-preview" (click)="handleClick()">
             <div class="contact-img">
                 <img *ngIf="contact.imgUrl" src="{{contact.imgUrl}}" alt="">
 
@@ -20,9 +20,6 @@
                     </span>
                 </div>
 
-
-
-
             </div>
             <div class="contact-content">
                 <div class="contact-title">
@@ -34,5 +31,5 @@
                 </div>
             </div>
         </div>
-    </a>
+    <!-- </a> -->
 </div>

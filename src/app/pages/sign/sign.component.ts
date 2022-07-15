@@ -3,7 +3,7 @@ import { Contact } from 'src/app/models/contact.model';
 import { CloudinaryService } from 'src/app/services/cloudinary.service';
 import { Subscription } from 'rxjs';
 import { ContactService } from 'src/app/services/contact.service';
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-sign',
   templateUrl: './sign.component.html',
@@ -12,11 +12,11 @@ import { ActivatedRoute, Router } from '@angular/router'
 export class SignComponent implements OnInit {
 
   constructor(private cloudinaryService: CloudinaryService, private contactservice: ContactService, private router: Router,) { }
-  contact = { name: '', password: '' , imgUrl:'', lastMsgTimeStemp: ''} as Contact
+  contact = { name: '', password: '', imgUrl: '', lastMsgTimeStemp: '' } as Contact
   imgUrl = null as any
   subImg !: Subscription
+  isSignUp: boolean = true ;
   ngOnInit(): void {
-    console.log('this.contact ', this.contact);
 
   }
 
@@ -29,16 +29,31 @@ export class SignComponent implements OnInit {
       this.contact.imgUrl = imgUrl
     })
   }
+  onSubmit(){
+    if (this.isSignUp) this.signup()
+    else this.login()
+  }
 
-  async onSignUp() {
+  async signup() {
     try {
-      await this.contactservice.signUp(this.contact)
+      await this.contactservice.signup(this.contact)
       this.router.navigateByUrl('/contact')
-
     } catch (error) {
-      console.log('can not add contact');
-
+      console.log('can not signup');
     }
+  }
+
+  async login(){
+    try {
+      await this.contactservice.login(this.contact)
+      this.router.navigateByUrl('/contact')
+    } catch (error) {
+      console.log('can not login');
+    }
+  }
+
+  onToggleSignInUp() {
+    this.isSignUp = !this.isSignUp
   }
 
   ngOnDestroy(): void {

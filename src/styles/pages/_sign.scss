@@ -4,6 +4,10 @@
     flex-direction: column;
     justify-content: center;
 
+    .bttn-switch-container {
+        margin: 5px 10px;
+    }
+
     .signup-container {
         display: flex;
         flex-direction: column;
@@ -16,9 +20,13 @@
                 @include btn($type: regular);
             }
         }
-        .input-file-container{
+
+
+
+        .input-file-container {
             margin: 5px 10px;
-            input{
+
+            input {
                 display: none;
             }
         }
@@ -27,6 +35,7 @@
             width: 100%;
             display: flex;
             justify-content: center;
+
             .img-container {
                 width: 200px;
                 height: 200px;

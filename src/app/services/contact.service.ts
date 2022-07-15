@@ -26,8 +26,15 @@ export class ContactService {
         this._contacts$.next(value as Contact[])
       })
   }
-  public async signUp(userCred: Contact) {
+
+  
+  public async signup(userCred: Contact) {
     const user = await lastValueFrom(this.http.post(this.BASE_URL + '/auth/signup', userCred))
+    return this.saveLocalUser(user as Contact)
+  }
+
+  public async login(userCred: Contact){
+    const user = await lastValueFrom(this.http.post(this.BASE_URL + '/auth/login', userCred))
     return this.saveLocalUser(user as Contact)
   }
 

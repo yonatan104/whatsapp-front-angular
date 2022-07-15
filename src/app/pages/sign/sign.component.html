@@ -1,32 +1,35 @@
 <div class="sign">
-    <form (ngSubmit)="onSignUp()">
-    <div class="signup-container">
-        <div *ngIf="imgUrl" class="img-container-main">
-            <div class="img-container">
+    <form (ngSubmit)="onSubmit()">
+        <div class="signup-container">
+            <div *ngIf="imgUrl" class="img-container-main">
+                <div class="img-container">
 
-                <img src="{{imgUrl}}" alt="">
+                    <img src="{{imgUrl}}" alt="">
+                </div>
             </div>
-        </div>
 
             <div class="input-container">
                 <input [(ngModel)]="contact.name" type="text" name="name" id="name" placeholder="Enter your name">
             </div>
             <div class="input-container">
                 <input [(ngModel)]="contact.password" type="text" name="password" id="password"
-                placeholder="Enter a password">
+                    placeholder="Enter a password">
             </div>
-            
-            <div class="input-file-container">
+
+            <div *ngIf="isSignUp" class="input-file-container">
                 <label for="inputTag">
                     Select Image
                     <input id="inputTag" type="file" (change)="onFileSelected($event)" />
                 </label>
             </div>
 
-            
             <div class="bttn-container">
-                <button>Signup</button>
+                <button *ngIf="isSignUp">Signup</button>
+                <button *ngIf="!isSignUp">Login</button>
             </div>
         </div>
     </form>
+    <div class="bttn-switch-container">
+        <div (click)="onToggleSignInUp()">Have acount? Switch to Login</div>
+    </div>
 </div>
