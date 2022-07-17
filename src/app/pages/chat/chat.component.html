@@ -1,6 +1,6 @@
 <div class="chat">
     <span class="back-ground-img"></span>
-    <chat-header></chat-header>
-    <message-list></message-list>
-    <chat-footer></chat-footer>
+    <chat-header [contact]="contact"></chat-header>
+    <message-list [messages]="chatRoom.messages" class="message-list-main"></message-list>
+    <chat-footer [chatRoom]="chatRoom"></chat-footer>
 </div>

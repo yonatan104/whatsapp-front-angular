@@ -15,8 +15,6 @@ export class ContactAppHeaderComponent implements OnInit {
   }
 
   onLogout(){
-    console.log('onLogout');
-    
     this.contactService.logout()
     this.router.navigateByUrl('')
   }

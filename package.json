@@ -21,6 +21,8 @@
     "@cloudinary/angular-5.x": "^1.5.3",
     "ng2-file-upload": "^1.4.0",
     "rxjs": "~7.5.0",
+    "socket.io": "^4.5.1",
+    "socket.io-client": "^4.5.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

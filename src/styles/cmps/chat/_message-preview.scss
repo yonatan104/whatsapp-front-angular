@@ -1,0 +1,36 @@
+.message-container {
+    padding-right: 7.5%;
+    padding-left: 7.5%;
+    margin-bottom: 12px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+
+    .message-content {
+
+        border-top-right-radius: 0;
+        background-color: #005c4b;
+        padding: 6px 7px 8px 9px;
+        max-width: 75%;
+        border-radius: 7.5px;
+        position: relative;
+        flex: none;
+        font-size: 14.2px;
+        line-height: 19px;
+        color: #e9edef;
+
+        .text {
+            position: relative;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+            // display: inline-block;
+        }
+
+        .time {
+            float: right;
+            margin: -10px 0 -5px 4px;
+            font-size: 0.6875rem;
+        }
+    }
+}

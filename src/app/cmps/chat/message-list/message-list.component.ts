@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ChatRoom } from 'src/app/models/chat-room';
+import { Message } from 'src/app/models/message';
 
 @Component({
   selector: 'message-list',
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class MessageListComponent implements OnInit {
 
   constructor() { }
-
+  @Input() messages!: Message[]
   ngOnInit(): void {
   }
 

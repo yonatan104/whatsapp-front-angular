@@ -48,7 +48,12 @@ input:focus {
     border: 1px solid $compose-input-border;
     border-radius: 8px;
 
-    input {
+    input  {
+        border: 0;
+        background-color: $compose-input-border;
+        color: $primary-strong;
+    }
+    input:focus  {
         border: 0;
         background-color: $compose-input-border;
         color: $primary-strong;

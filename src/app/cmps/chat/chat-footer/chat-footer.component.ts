@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ChatRoom } from 'src/app/models/chat-room';
+import { Contact } from 'src/app/models/contact.model';
+import { Message } from 'src/app/models/message';
+import { ChatService } from 'src/app/services/chat-room.service';
+import { ContactService } from 'src/app/services/contact.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'chat-footer',
@@ -7,9 +13,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatFooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private contactService: ContactService, private utilService: UtilService, private chatService: ChatService) { }
 
+  loggedUser: Contact = this.contactService.getLoggedinUser()
+  message: Message = {
+    fromUser: {
+      name: this.loggedUser.name,
+      imgUrl: this.loggedUser.imgUrl,
+      userId: this.loggedUser._id || ''
+    },
+    text: ''
+  }
+  @Input() chatRoom!: ChatRoom
   ngOnInit(): void {
+  }
+  async onSendMsg() {
+    this.message._id = this.utilService.makeId()
+    this.message.createAt = Date.now()
+    this.chatRoom.messages.push({...this.message})
+    this.chatService.save(this.chatRoom)
+    this.message.text = ''
   }
 
 }

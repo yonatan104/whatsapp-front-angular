@@ -1,4 +1,4 @@
-<div class="chat-header">
+<div *ngIf="contact" class="chat-header">
     <div class="avatar-main-container">
         <div class="avatar-container">
             <div class="svg-container">
@@ -15,14 +15,13 @@
                     </svg>
                 </span>
             </div>
-            <img src="https://pps.whatsapp.net/v/t61.24694-24/55900132_2169235529832482_9148236321360183296_n.jpg?stp=dst-jpg_s96x96&ccb=11-4&oh=01_AVzsZUYVrzr9qGWs05PIM8zyMIQfp_tXsFKe1G_WyW217Q&oe=62D6454C"
-                alt="">
+            <img *ngIf="contact.imgUrl" src="{{contact.imgUrl}}" alt="">
         </div>
     </div>
     <div class="chat-name">
 
         <div class="title-container">
-            <span class="title-content">Erez Wizel</span>
+            <span class="title-content">{{contact.name}}</span>
         </div>
         <!-- <h2 class="subtitle">Online</h2> -->
 

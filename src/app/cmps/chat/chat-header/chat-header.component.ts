@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Contact } from 'src/app/models/contact.model';
 
 @Component({
   selector: 'chat-header',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ChatHeaderComponent implements OnInit {
 
   constructor() { }
-
+  @Input() contact!: Contact
   ngOnInit(): void {
   }
 

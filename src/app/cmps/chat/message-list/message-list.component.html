@@ -1,1 +1,3 @@
-<p>message-list works!</p>
+<div class="message-list-container">
+    <message-preview *ngFor="let message of messages" [message]="message"></message-preview>
+</div>
