@@ -10,10 +10,8 @@ import { environment } from '../../environments/environment';
 export class ContactService {
   private _contacts$ = new BehaviorSubject<Contact[]>([])
   public contacts$ = this._contacts$.asObservable()
-  
-  private _contactById$ = new BehaviorSubject<Contact>({} as Contact)
-  public contactById$ = this._contactById$.asObservable()
-  
+
+
 
   private _STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
@@ -39,12 +37,10 @@ export class ContactService {
   }
 
   public async getById(_id: string) {
-    const contact =  await lastValueFrom(this.http.get(this.BASE_URL + '/user/' + _id)) as Contact
-    this._contactById$.next(contact)
-    return contact
+    return await lastValueFrom(this.http.get(this.BASE_URL + '/user/' + _id)) as Contact
   }
 
-  public async refreshLoggedUser(){
+  public async refreshLoggedUser() {
     const loggedUser = this.getLoggedinUser() as Contact
     const newLoggedUser = await this.getById(loggedUser._id as string)
     this.saveLocalUser(newLoggedUser as Contact)

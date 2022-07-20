@@ -11,6 +11,8 @@ export class ChatHeaderComponent implements OnInit {
   constructor() { }
   @Input() contact!: Contact
   ngOnInit(): void {
+    console.log('contact999', this.contact);
+    
   }
 
 }

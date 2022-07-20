@@ -23,6 +23,8 @@ export class ContactAppComponent implements OnInit {
 
 
     this.webSocketService.listen('new-message').subscribe((data) => {
+      console.log('data',data);
+      
       this.contactService.refreshLoggedUser()
       console.log('hihihihihihiihihihi');
 

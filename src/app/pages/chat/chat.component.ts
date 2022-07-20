@@ -50,8 +50,8 @@ export class ChatComponent implements OnInit {
       this.chatRoom = value
     })
     
-     this.contactService.getById(contactId) 
-    this.contactService.contactById$.subscribe(v => this.contact =v)
-    console.log("🚀 ~ file: chat.component.ts ~ line 47 ~ ChatComponent ~ loadChatRoom ~ this.contact", this.contact)
+     this.contact = await this.contactService.getById(contactId) 
+    // this.contactService.contactById$.subscribe(v => this.contact =v)
+    // console.log("🚀 ~ file: chat.component.ts ~ line 47 ~ ChatComponent ~ loadChatRoom ~ this.contact", this.contact)
   }
 }
