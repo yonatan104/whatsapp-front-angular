@@ -1,6 +1,11 @@
 <div class="contact-app">
-   <contact-app-header></contact-app-header>
-   <contact-filter></contact-filter>
-   <contact-list [contacts]="(contacts$ | async)!"></contact-list>
+   <div class="contacts-app-container">
+      <contact-app-header></contact-app-header>
+      <contact-filter></contact-filter>
+      <contact-list [contacts]="(contacts$ | async)!"></contact-list>
+   </div>
+   <div class="chat-app-container">
+      <app-chat></app-chat>
+   </div>
    
 </div>

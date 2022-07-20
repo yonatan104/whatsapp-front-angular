@@ -1,6 +1,6 @@
 .contact-app {
     height: 100vh;
     overflow-y: hidden;
-    // display: grid;
-    // grid-template-rows: auto auto 5fr;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
 }

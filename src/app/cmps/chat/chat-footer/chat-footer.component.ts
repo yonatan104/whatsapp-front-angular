@@ -5,6 +5,7 @@ import { Message } from 'src/app/models/message';
 import { ChatService } from 'src/app/services/chat-room.service';
 import { ContactService } from 'src/app/services/contact.service';
 import { UtilService } from 'src/app/services/util.service';
+import { WebSocketService } from 'src/app/services/web-socket.service';
 
 @Component({
   selector: 'chat-footer',
@@ -13,7 +14,12 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class ChatFooterComponent implements OnInit {
 
-  constructor(private contactService: ContactService, private utilService: UtilService, private chatService: ChatService) { }
+  constructor(
+    private contactService: ContactService,
+    private utilService: UtilService,
+    private chatService: ChatService,
+    private webSocketService: WebSocketService
+  ) { }
 
   loggedUser: Contact = this.contactService.getLoggedinUser()
   message: Message = {
@@ -30,7 +36,8 @@ export class ChatFooterComponent implements OnInit {
   async onSendMsg() {
     this.message._id = this.utilService.makeId()
     this.message.createAt = Date.now()
-    this.chatRoom.messages.push({...this.message})
+    this.chatRoom.messages.push({ ...this.message })
+    this.webSocketService.emit('send-message', this.chatRoom)
     this.chatService.save(this.chatRoom)
     this.message.text = ''
   }

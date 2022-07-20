@@ -1,5 +1,5 @@
 <footer class="chat-footer-container">
-    <form (ngSubmit)="onSendMsg()">
+    <form autocomplete="off" (ngSubmit)="onSendMsg()">
         <div class="chat-footer">
             <div class="input-container">
                 <input [(ngModel)]="message.text" name="message" type="text" placeholder="Type a message">

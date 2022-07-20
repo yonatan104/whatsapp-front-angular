@@ -7,8 +7,13 @@ import { SignComponent } from './pages/sign/sign.component';
 
 const routes: Routes = [
   { path: '', component: SignComponent },
-  { path: 'contact', component: ContactAppComponent },
-  { path: 'contact/:id', component: ChatComponent },
+  // { path: 'contact', component: ContactAppComponent },
+  // { path: 'contact/:id', component: ContactAppComponent },
+  {
+    path: 'contact', component: ContactAppComponent,
+    children: [
+      { path: ':id', component: ChatComponent }
+    ],}
 ]
 
 @NgModule({

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, filter, identity, lastValueFrom, map, toArray } from 'rxjs';
 import { Contact } from '../models/contact.model';
 import { environment } from '../../environments/environment';
-import { io } from "socket.io-client";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,10 @@ import { io } from "socket.io-client";
 export class ContactService {
   private _contacts$ = new BehaviorSubject<Contact[]>([])
   public contacts$ = this._contacts$.asObservable()
-
+  
+  private _contactById$ = new BehaviorSubject<Contact>({} as Contact)
+  public contactById$ = this._contactById$.asObservable()
+  
 
   private _STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
@@ -20,7 +22,6 @@ export class ContactService {
       ? '/api'
       : 'http://localhost:3030/api'
 
-  socket = environment.production ? io('') : io('http://localhost:3030')
 
   constructor(private http: HttpClient) { }
 
@@ -38,7 +39,15 @@ export class ContactService {
   }
 
   public async getById(_id: string) {
-    return await lastValueFrom(this.http.get(this.BASE_URL + '/user/' + _id))
+    const contact =  await lastValueFrom(this.http.get(this.BASE_URL + '/user/' + _id)) as Contact
+    this._contactById$.next(contact)
+    return contact
+  }
+
+  public async refreshLoggedUser(){
+    const loggedUser = this.getLoggedinUser() as Contact
+    const newLoggedUser = await this.getById(loggedUser._id as string)
+    this.saveLocalUser(newLoggedUser as Contact)
   }
 
 

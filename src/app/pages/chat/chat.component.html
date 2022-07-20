@@ -1,6 +1,6 @@
 <div class="chat">
     <span class="back-ground-img"></span>
-    <chat-header [contact]="contact"></chat-header>
-    <message-list [messages]="chatRoom.messages" class="message-list-main"></message-list>
-    <chat-footer [chatRoom]="chatRoom"></chat-footer>
+    <chat-header *ngIf="contact" [contact]="contact"></chat-header>
+    <message-list *ngIf="chatRoom" [messages]="chatRoom.messages" class="message-list-main"></message-list>
+    <chat-footer *ngIf="chatRoom" [chatRoom]="chatRoom"></chat-footer>
 </div>

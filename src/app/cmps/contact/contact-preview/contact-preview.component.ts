@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy } from '@angular/core'
 import { lastValueFrom, Observable } from 'rxjs';
 import { ChatRoom } from 'src/app/models/chat-room';
 import { Contact } from 'src/app/models/contact.model'
@@ -28,14 +28,14 @@ export class ContactPreviewComponent implements OnInit {
           this.chatRoom = value
         })
         this.updateUsersIdsRooms()
+        if (this.chatRoom._id) this.router.navigateByUrl(`contact/?contact=${this.contact._id}&chatRoom=${this.chatRoom._id}`)
       } else {
         this.chatService.getById(chatRoomId)
         this.chatService.chatRoom$.subscribe(value => {
           this.chatRoom = value
-          if (this.chatRoom._id) this.router.navigateByUrl(`contact/?contact=${this.contact._id}&chatRoom=${this.chatRoom._id}`)
         })
+        this.router.navigateByUrl(`contact/?contact=${this.contact._id}&chatRoom=${chatRoomId}`)
       }
-      // this.router.navigateByUrl('contact/' + this.chatRoom._id)
     }
     catch (error) {
       console.error('can not enter chatRoom', error);
@@ -71,6 +71,10 @@ export class ContactPreviewComponent implements OnInit {
     this.contactService.saveLocalUser(this.loggedUser)
     this.contactService.updateUser(this.contact)
     this.contactService.updateUser(this.loggedUser)
+  }
+
+  ngOnDestroy() {
+    console.log("destroying child...")
   }
 }
 
