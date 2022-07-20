@@ -17,13 +17,15 @@ export class ContactAppComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('hello ');
-
     this.contactService.query()
     this.contacts$ = this.contactService.contacts$
-
-
+    
+    
+    
     this.webSocketService.listen('new-message').subscribe((data) => {
       console.log('data',data);
+      this.contactService.query()
+      this.contacts$ = this.contactService.contacts$
       
       this.contactService.refreshLoggedUser()
       console.log('hihihihihihiihihihi');

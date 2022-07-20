@@ -1,6 +1,8 @@
 .contact-filter-container {
     background-color: #111b21;
     border-bottom: 1px solid rgba(134, 150, 160, 0.15);
+    position: relative;
+    z-index: 100;
 
     .contact-filter {
         padding: 0 12px;
