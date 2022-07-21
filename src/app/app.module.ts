@@ -16,6 +16,7 @@ import { MessagePreviewComponent } from './cmps/chat/message-preview/message-pre
 import { SignComponent } from './pages/sign/sign.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { VideoCallComponent } from './cmps/video-call/video-call.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     ChatFooterComponent,
     MessageListComponent,
     MessagePreviewComponent,
-    SignComponent
+    SignComponent,
+    VideoCallComponent
   ],
   imports: [
     BrowserModule,

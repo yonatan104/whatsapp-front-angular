@@ -19,7 +19,8 @@ export class ContactAppComponent implements OnInit {
     console.log('hello ');
     this.contactService.query()
     this.contacts$ = this.contactService.contacts$
-    
+    const loggedUser = this.contactService.getLoggedinUser()
+    this.contactService.setUserSocket(loggedUser)
     
     
     this.webSocketService.listen('new-message').subscribe((data) => {

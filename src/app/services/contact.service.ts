@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, filter, identity, lastValueFrom, map, toArray } from 'rxjs';
 import { Contact } from '../models/contact.model';
 import { environment } from '../../environments/environment';
+import { WebSocketService } from './web-socket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class ContactService {
       : 'http://localhost:3030/api'
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private webSocketService: WebSocketService) { }
 
   public query() {
     this.http.get(this.BASE_URL + '/user', { params: { logedInUserId: this.getLoggedinUser()._id } })
@@ -49,12 +50,13 @@ export class ContactService {
 
   public async signup(userCred: Contact) {
     const user = await lastValueFrom(this.http.post(this.BASE_URL + '/auth/signup', userCred))
-
+    this.setUserSocket(user as Contact)
     return this.saveLocalUser(user as Contact)
   }
 
   public async login(userCred: Contact) {
     const user = await lastValueFrom(this.http.post(this.BASE_URL + '/auth/login', userCred))
+    this.setUserSocket(user as Contact)
     return this.saveLocalUser(user as Contact)
   }
 
@@ -63,10 +65,17 @@ export class ContactService {
     return await lastValueFrom(this.http.post(this.BASE_URL + '/auth/logout', {}))
   }
 
+  public setUserSocket(user: Contact | undefined) {
+    const loggedUser = user ? user : this.getLoggedinUser() as Contact
+    if (!loggedUser || !loggedUser._id) return console.error('can not get logged in user!!')
+    this.webSocketService.emit('set-user-socket', loggedUser._id)
+  }
+
   public saveLocalUser(user: Contact) {
     sessionStorage.setItem(this._STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
   }
+
 
   public getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(this._STORAGE_KEY_LOGGEDIN_USER) || '')

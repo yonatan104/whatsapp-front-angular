@@ -1,0 +1,15 @@
+.video-call-modal-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+
+    .video-call-modal {
+        .remote-video {
+            width: 40vw;
+            height: 40vh;
+            background-color: black;
+        }
+    }
+}

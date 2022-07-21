@@ -3,4 +3,11 @@
     overflow-y: hidden;
     display: grid;
     grid-template-columns: 1fr 3fr;
+
+    .call-container {
+        position: absolute;
+        // z-index: 1001;
+        inset: 0;
+        // background-color: #0000003f;
+    }
 }
