@@ -1,15 +1,6 @@
 <div *ngIf="isVideoOpen" class="video-call-modal-container">
     <div class="video-call-modal">
-        <!-- <h5>Connect with Peer</h5> -->
-
-        <!-- Video & screen share container -->
-        <!-- <span>PeerId: {{peerId}}</span> -->
         <div class="remote-video" id="remote-video"></div>
-
-        <!-- <div style="margin-top: 20px;"> -->
-            <!-- <input type="text" placeholder="Peer Id" [(ngModel)]='peerIdShare' /> -->
-            <!-- <button class="button" (click)="connectWithPeer()">Call Peer</button> -->
-            <!-- <button class="button" (click)="screenShare()">Screen share</button> -->
-        <!-- </div> -->
+            <button class="button" (click)="screenShare()">Screen share</button>
     </div>
 </div>
