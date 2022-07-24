@@ -1,6 +1,9 @@
 <div *ngIf="isVideoOpen" class="video-call-modal-container">
     <div class="video-call-modal">
         <div class="remote-video" id="remote-video"></div>
-            <button class="button" (click)="screenShare()">Screen share</button>
+        <video class="local-video" id="localVideo" autoplay playsinline controls="false"></video>
+        <button *ngIf="!isMyScreenShared" class="share-screen" (click)="screenShare()">Screen share</button>
+        <button *ngIf="isMyScreenShared" class="share-screen" (click)="stopScreenShare()">Stop share screen</button>
+        <button (click)="disconnect()">Disconnect</button>
     </div>
 </div>

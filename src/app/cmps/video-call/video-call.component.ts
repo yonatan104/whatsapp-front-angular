@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import Peer from 'peerjs';
-import { CallRequest } from 'src/app/models/call-request';
-import { CallService } from 'src/app/services/call.service';
-import { WebSocketService } from 'src/app/services/web-socket.service';
+import { Component, OnInit } from '@angular/core'
+import Peer from 'peerjs'
+import { CallRequest } from 'src/app/models/call-request'
+import { CallService } from 'src/app/services/call.service'
+import { WebSocketService } from 'src/app/services/web-socket.service'
 @Component({
   selector: 'app-video-call',
   templateUrl: './video-call.component.html',
@@ -10,66 +10,85 @@ import { WebSocketService } from 'src/app/services/web-socket.service';
 })
 export class VideoCallComponent implements OnInit {
 
-  private peer: Peer;
-  peerIdShare: string = '';
-  peerId: string = '';
-  private lazyStream: any;
-  currentPeer: any;
-  private peerList: Array<any> = [];
+  private peer: Peer
+  peerIdShare: string = ''
+  peerId: string = ''
+  private lazyStream: any
+  currentPeer: any
+  private peerList: Array<any> = []
   isVideoOpen: Boolean = false
+  isMyScreenShared: Boolean = false
+  secondUserId: string = ''
 
   constructor(private callService: CallService, private webSocketService: WebSocketService) {
-    this.peer = new Peer();
+    this.peer = new Peer()
   }
 
   ngOnInit(): void {
     this.getPeerId()
     this.callService.callRequest$.subscribe(callRqs => {
-      console.log('new call');
       if (!this.peerId) return
+      this.secondUserId = callRqs.toUserId
       const callRqsToSend = callRqs
       callRqsToSend.fromUser.peerId = this.peerId
       this.callService.sendRequest(callRqsToSend)
       this.isVideoOpen = true
     })
-    this.webSocketService.listen('new-call-Request').subscribe((incomingCallRqs: any)=>{
-      console.log('incomingCallRqs', incomingCallRqs);
+    this.webSocketService.listen('incoming-call-Request').subscribe((incomingCallRqs: any) => {
       this.isVideoOpen = true
+      this.secondUserId = incomingCallRqs.toUserId
       const peerIdShare = incomingCallRqs.fromUser.peerId as string
       this.callPeer(peerIdShare)
-
     })
-    
+
+    this.webSocketService.listen('got-disconnect-peer-call').subscribe(userIdToDisconnect => {
+      console.log('got-disconnect-peer-call')
+      this.isVideoOpen = false
+      this.peer.destroy()
+      this.peer = new Peer()
+      this.pauseVideoFromCamera()
+    })
+  }
+
+  disconnect() {
+    console.log('disconnect')
+
+    this.peer.destroy()
+    this.peer = new Peer()
+    this.isVideoOpen = false
+    this.webSocketService.emit('disconnect-peer-call', { toUserId: this.secondUserId })
+    this.pauseVideoFromCamera()
   }
 
   private getPeerId = () => {
     this.peer.on('open', (id) => {
-      this.peerId = id;
-    });
+      this.peerId = id
+    })
+
 
     this.peer.on('call', (call) => {
       navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true
       }).then((stream) => {
-        this.lazyStream = stream;
+        this.lazyStream = stream
 
-        call.answer(stream);
+        call.answer(stream)
         call.on('stream', (remoteStream) => {
           if (!this.peerList.includes(call.peer)) {
-            this.streamRemoteVideo(remoteStream);
-            this.currentPeer = call.peerConnection;
-            this.peerList.push(call.peer);
+            this.streamRemoteVideo(remoteStream)
+            this.currentPeer = call.peerConnection
+            this.peerList.push(call.peer)
           }
-        });
+        })
       }).catch(err => {
-        console.log(err + 'Unable to get media');
-      });
-    });
+        console.log(err + 'Unable to get media')
+      })
+    })
   }
 
   connectWithPeer(): void {
-    this.callPeer(this.peerIdShare);
+    this.callPeer(this.peerIdShare)
   }
 
 
@@ -78,61 +97,93 @@ export class VideoCallComponent implements OnInit {
       video: true,
       audio: true
     }).then((stream) => {
-      this.lazyStream = stream;
+      this.lazyStream = stream
 
-      const call = this.peer.call(id, stream);
+      const call = this.peer.call(id, stream)
       call.on('stream', (remoteStream) => {
         if (!this.peerList.includes(call.peer)) {
-          this.streamRemoteVideo(remoteStream);
-          this.currentPeer = call.peerConnection;
-          this.peerList.push(call.peer);
+          this.streamRemoteVideo(remoteStream)
+          this.currentPeer = call.peerConnection
+          this.peerList.push(call.peer)
         }
-      });
+      })
     }).catch(err => {
-      console.log(err + 'Unable to connect');
-    });
+      console.log(err + 'Unable to connect')
+    })
   }
 
 
+  async playVideoFromCamera() {
+    try {
+      const constraints = { 'video': true, 'audio': true }
+      const stream = await navigator.mediaDevices.getUserMedia(constraints)
+      const videoElement = document.querySelector('video#localVideo')
+      // @ts-ignore
+      videoElement.srcObject = stream
+    } catch (error) {
+      console.error('Error opening video camera.', error)
+    }
+  }
+
+  async pauseVideoFromCamera() {
+    // try {
+    //   const constraints = { 'video': false, 'audio': false }
+    //   const stream = await navigator.mediaDevices.getUserMedia(constraints)
+    //   // const videoElement = document.querySelector('video#localVideo')
+    //   // @ts-ignore
+    //   // videoElement.srcObject = ''
+    // } catch (error) {
+    //   console.error('Error opening video camera.', error)
+    // }
+  }
+
+
+
+
   private streamRemoteVideo(stream: any): void {
-    const video = document.createElement('video');
-    video.classList.add('video');
-    video.srcObject = stream;
-    video.play();
+    this.playVideoFromCamera()
+
+    const video = document.createElement('video')
+    video.classList.add('video')
+    video.srcObject = stream
+    video.play()
 
     document.getElementById('remote-video')?.append(video)
   }
 
   screenShare(): void {
-    this.shareScreen();
+    this.shareScreen()
+    this.isMyScreenShared = true
   }
   private shareScreen(): void {
     // @ts-ignore
     navigator.mediaDevices.getDisplayMedia({
       video: {
-        // cursor: 'always'
+        // @ts-ignore
+        cursor: 'always'
       },
       audio: {
         echoCancellation: true,
         noiseSuppression: true
       }
     }).then(stream => {
-      const videoTrack = stream.getVideoTracks()[0];
+      const videoTrack = stream.getVideoTracks()[0]
       videoTrack.onended = () => {
-        this.stopScreenShare();
-      };
+        this.stopScreenShare()
+      }
 
-      const sender = this.currentPeer.getSenders().find((s: { track: { kind: string; }; }) => s.track.kind === videoTrack.kind);
-      sender.replaceTrack(videoTrack);
+      const sender = this.currentPeer.getSenders().find((s: { track: { kind: string } }) => s.track.kind === videoTrack.kind)
+      sender.replaceTrack(videoTrack)
     }).catch(err => {
-      console.log('Unable to get display media ' + err);
-    });
+      console.log('Unable to get display media ' + err)
+    })
   }
 
-  private stopScreenShare(): void {
-    const videoTrack = this.lazyStream.getVideoTracks()[0];
-    const sender = this.currentPeer.getSenders().find((s: { track: { kind: any; }; }) => s.track.kind === videoTrack.kind);
-    sender.replaceTrack(videoTrack);
+  stopScreenShare(): void {
+    const videoTrack = this.lazyStream.getVideoTracks()[0]
+    const sender = this.currentPeer.getSenders().find((s: { track: { kind: any } }) => s.track.kind === videoTrack.kind)
+    sender.replaceTrack(videoTrack)
+    this.isMyScreenShared = false
   }
 
 }
