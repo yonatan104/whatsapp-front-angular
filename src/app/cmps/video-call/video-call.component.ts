@@ -43,21 +43,27 @@ export class VideoCallComponent implements OnInit {
 
     this.webSocketService.listen('got-disconnect-peer-call').subscribe(userIdToDisconnect => {
       console.log('got-disconnect-peer-call')
-      this.isVideoOpen = false
+      const stream = this.lazyStream
+      stream.getTracks().forEach(function (track: { stop: () => void }) {
+        track.stop();
+      });
+      this.peer.disconnect()
       this.peer.destroy()
+      this.isVideoOpen = false
       this.peer = new Peer()
-      this.pauseVideoFromCamera()
     })
   }
 
   disconnect() {
-    console.log('disconnect')
-
+    this.peer.disconnect()
     this.peer.destroy()
+    const stream = this.lazyStream
+    stream.getTracks().forEach(function (track: { stop: () => void }) {
+      track.stop();
+    });
     this.peer = new Peer()
     this.isVideoOpen = false
     this.webSocketService.emit('disconnect-peer-call', { toUserId: this.secondUserId })
-    this.pauseVideoFromCamera()
   }
 
   private getPeerId = () => {
@@ -125,20 +131,7 @@ export class VideoCallComponent implements OnInit {
     }
   }
 
-  async pauseVideoFromCamera() {
-    // try {
-    //   const constraints = { 'video': false, 'audio': false }
-    //   const stream = await navigator.mediaDevices.getUserMedia(constraints)
-    //   // const videoElement = document.querySelector('video#localVideo')
-    //   // @ts-ignore
-    //   // videoElement.srcObject = ''
-    // } catch (error) {
-    //   console.error('Error opening video camera.', error)
-    // }
-  }
-
-
-
+  
 
   private streamRemoteVideo(stream: any): void {
     this.playVideoFromCamera()

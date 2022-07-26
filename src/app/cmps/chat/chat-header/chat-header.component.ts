@@ -10,7 +10,6 @@ import { ContactService } from 'src/app/services/contact.service';
   styleUrls: ['./chat-header.component.scss']
 })
 export class ChatHeaderComponent implements OnInit {
-
   constructor(private callService: CallService, private contactService: ContactService) { }
   @Input() contact!: Contact
   ngOnInit(): void {
@@ -33,5 +32,10 @@ export class ChatHeaderComponent implements OnInit {
     }
     this.callService.callRequest(callRqs)
   }
+  
+  
+  
+
+
 
 }
