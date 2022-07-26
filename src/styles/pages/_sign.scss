@@ -1,8 +1,14 @@
 .sign {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    // height: 100vh;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+
+    width: 50vw;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
     .bttn-switch-container {
         margin: 5px 10px;

@@ -87,4 +87,20 @@
         }
     }
 
+
+    .options-container {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        svg {
+            width: 2rem;
+            fill: #8696a0;
+        }
+
+        svg:hover {
+            cursor: pointer;
+        }
+    }
+
 }

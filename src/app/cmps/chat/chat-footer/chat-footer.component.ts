@@ -34,6 +34,7 @@ export class ChatFooterComponent implements OnInit {
   ngOnInit(): void {
   }
   async onSendMsg() {
+    if (this.message.text === '') return 
     this.message._id = this.utilService.makeId()
     this.message.createAt = Date.now()
     this.chatRoom.messages.push({ ...this.message })
