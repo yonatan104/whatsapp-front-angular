@@ -23,6 +23,7 @@ export class ChatComponent implements OnInit {
   ) { }
   contact!: Contact
   chatRoom!: ChatRoom
+  //main
   // sub!: Observable<Router>
   ngOnInit(): void {
     this.route.queryParams.subscribe(queryParams => {
