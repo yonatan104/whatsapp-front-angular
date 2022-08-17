@@ -22,6 +22,7 @@ export class ChatComponent implements OnInit {
     private webSocketService: WebSocketService
   ) { }
   contact!: Contact
+  ///test222222222222222
   chatRoom!: ChatRoom
   // sub!: Observable<Router>
   ngOnInit(): void {
